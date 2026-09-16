@@ -20,8 +20,12 @@ logger = logging.getLogger(__name__)
 
 
 s = requests.Session()
-s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0"
-s.headers["Accept"] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+s.headers["User-Agent"] = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0"
+)
+s.headers["Accept"] = (
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+)
 s.headers["Accept-Language"] = "en-US,en;q=0.5"
 s.headers["Accept-Encoding"] = "gzip, deflate"
 s.headers["DNT"] = "1"
@@ -53,7 +57,9 @@ def _get_cache_file(url: str) -> Path:
 
 def _get_page(url: str, caching_time: int | None = _CACHING_TIME) -> bytes:
     cache_file = _get_cache_file(url)
-    if cache_file.exists() and (caching_time is None or time.time() - cache_file.stat().st_mtime < caching_time):
+    if cache_file.exists() and (
+        caching_time is None or time.time() - cache_file.stat().st_mtime < caching_time
+    ):
         return cache_file.read_bytes()
 
     response = s.get(url)
