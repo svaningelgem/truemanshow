@@ -1,0 +1,13 @@
+[project]
+name = "truemanshow"
+version = "0.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "requests",
+    "browser_cookie3",
+    "brotlipy",
+    "bs4",
+]
+
+[tool.uv]
+package = false
